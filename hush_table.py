@@ -16,12 +16,18 @@ class HashTable:
         if self.slots[slot_number] is None:
             return slot_number
         else:
-            for i in range(-slot_number+self.step, slot_number, self.step):
-                if i < 0:
-                    x = i*(-1)
-                    print("x", x)
-                if self.slots[x] is None:
-                    return x
+            flag = False
+            cont = True
+            while cont == True:
+                slot_number += 3
+                if slot_number >= self.size:
+                    if flag == False:
+                        slot_number = slot_number - self.size
+                        flag = True
+                    else:
+                        return None
+                if self.slots[slot_number] is None:
+                    return slot_number
         return None
 
     def put(self, value):
@@ -31,13 +37,3 @@ class HashTable:
             return slot_number
         else:
             return None
-
-    def find(self, value):
-        # находит индекс слота со значением, или None
-        return None
-
-hash = HashTable(17,3)
-print(hash.hash_fun("a"))
-print(hash.seek_slot("a"))
-print(hash.put("a"))
-print(hash.put("a"))
